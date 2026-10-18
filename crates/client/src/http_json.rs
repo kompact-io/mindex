@@ -40,9 +40,14 @@ impl Client {
         req: &Req,
     ) -> Result<Resp> {
         let body = serde_json::to_vec(req)?;
-        let (status, body) =
-            http_common::post(&self.addr, path, &body, "application/json", "application/json")
-                .await?;
+        let (status, body) = http_common::post(
+            &self.addr,
+            path,
+            &body,
+            "application/json",
+            "application/json",
+        )
+        .await?;
         decode(status, &body)
     }
 
@@ -55,9 +60,14 @@ impl Client {
         req: &Req,
     ) -> Result<Option<Resp>> {
         let body = serde_json::to_vec(req)?;
-        let (status, body) =
-            http_common::post(&self.addr, path, &body, "application/json", "application/json")
-                .await?;
+        let (status, body) = http_common::post(
+            &self.addr,
+            path,
+            &body,
+            "application/json",
+            "application/json",
+        )
+        .await?;
         if status == 404 {
             return Ok(None);
         }

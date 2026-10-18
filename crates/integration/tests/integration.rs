@@ -348,7 +348,10 @@ async fn assert_full_round_trip<B: Backend>(client: &mut B) {
     // error -- a list RPC, see `ReadUtxosResponse`'s own shape).
     let resp = client
         .read_utxos(ReadUtxosRequest {
-            keys: vec![TxoRef { hash: TX0, index: 0 }],
+            keys: vec![TxoRef {
+                hash: TX0,
+                index: 0,
+            }],
         })
         .await
         .unwrap();
@@ -450,9 +453,7 @@ async fn assert_full_round_trip<B: Backend>(client: &mut B) {
     assert_eq!(tx.tx.outputs[0].coin, 7);
     assert!(
         client
-            .read_tx(ReadTxRequest {
-                hash: [0xffu8; 32]
-            })
+            .read_tx(ReadTxRequest { hash: [0xffu8; 32] })
             .await
             .unwrap()
             .is_none()
@@ -467,9 +468,7 @@ async fn assert_full_round_trip<B: Backend>(client: &mut B) {
     assert_eq!(datum.value.native_bytes, DATUM_CBOR);
     assert!(
         client
-            .read_data(ReadDataRequest {
-                key: [0xffu8; 32]
-            })
+            .read_data(ReadDataRequest { key: [0xffu8; 32] })
             .await
             .unwrap()
             .is_none()

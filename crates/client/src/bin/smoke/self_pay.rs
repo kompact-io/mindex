@@ -30,9 +30,14 @@ impl From<anyhow::Error> for SelfPayError {
 }
 
 pub enum SelfPayResult {
-    #[allow(dead_code)] // `run(.., submit: false)` builds but never submits -- unused by smoke today, kept for completeness.
-    Built { tx_hex: String },
-    Submitted { r#ref: String },
+    #[allow(dead_code)]
+    // `run(.., submit: false)` builds but never submits -- unused by smoke today, kept for completeness.
+    Built {
+        tx_hex: String,
+    },
+    Submitted {
+        r#ref: String,
+    },
 }
 
 /// `skey`'s own payment hash -- the same derivation `run` uses

@@ -41,9 +41,14 @@ impl Client {
     ) -> Result<Resp> {
         let mut body = Vec::new();
         minicbor::encode(req, &mut body)?;
-        let (status, body) =
-            http_common::post(&self.addr, path, &body, "application/cbor", "application/cbor")
-                .await?;
+        let (status, body) = http_common::post(
+            &self.addr,
+            path,
+            &body,
+            "application/cbor",
+            "application/cbor",
+        )
+        .await?;
         decode(status, &body)
     }
 
@@ -56,9 +61,14 @@ impl Client {
     ) -> Result<Option<Resp>> {
         let mut body = Vec::new();
         minicbor::encode(req, &mut body)?;
-        let (status, body) =
-            http_common::post(&self.addr, path, &body, "application/cbor", "application/cbor")
-                .await?;
+        let (status, body) = http_common::post(
+            &self.addr,
+            path,
+            &body,
+            "application/cbor",
+            "application/cbor",
+        )
+        .await?;
         if status == 404 {
             return Ok(None);
         }

@@ -47,8 +47,8 @@ use tracing_subscriber::EnvFilter;
 use floe_client::{AnyClient, Backend, Hash28, NetworkArg, Scheme, SchemeArgs, TxHash, parse_hex};
 use floe_dto_http::health::MetricsResponse;
 use floe_dto_http::query::{
-    ChainPoint, ReadDataRequest, ReadDataResponse, ReadTxRequest, ReadTxResponse,
-    ReadUtxosRequest, SearchUtxosRequest, SearchUtxosResponse, TxoRef, Utxo,
+    ChainPoint, ReadDataRequest, ReadDataResponse, ReadTxRequest, ReadTxResponse, ReadUtxosRequest,
+    SearchUtxosRequest, SearchUtxosResponse, TxoRef, Utxo,
 };
 
 /// Total requests recorded under `scheme`, across every method --
@@ -452,7 +452,10 @@ async fn run_smoke<B: Backend>(client: &mut B, cli: &Cli, scheme: Scheme) -> Res
     if let Some(before) = metrics_before {
         match client.get_metrics().await {
             Ok(after) => {
-                let (b, a) = (total_requests(&before, scheme), total_requests(&after, scheme));
+                let (b, a) = (
+                    total_requests(&before, scheme),
+                    total_requests(&after, scheme),
+                );
                 if a > b {
                     record(Step::Ok(format!(
                         "[{scheme}] GetMetrics: requests[{scheme}] {b} -> {a}, reflects this run's own traffic"

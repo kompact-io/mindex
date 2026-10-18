@@ -80,8 +80,10 @@ impl Health {
             FRESH_ENTER_DEPTH
         };
         let depth = peer_tip_block_no.saturating_sub(block_no);
-        self.fresh
-            .store(mode == Mode::Running && depth <= threshold, Ordering::Relaxed);
+        self.fresh.store(
+            mode == Mode::Running && depth <= threshold,
+            Ordering::Relaxed,
+        );
         self.tip_slot.store(slot, Ordering::Relaxed);
         self.block_no.store(block_no, Ordering::Relaxed);
         self.peer_tip_block_no

@@ -184,7 +184,11 @@ impl Backend for AnyClient {
 /// client. Each scheme gated by its own compile-time feature, matching
 /// `floe-server`'s own "not compiled in" `bail!` message style.
 #[allow(unused_variables)] // `args`/`ready_timeout` unused when no scheme feature is compiled in
-pub async fn connect(scheme: Scheme, args: &SchemeArgs, ready_timeout: Duration) -> Result<AnyClient> {
+pub async fn connect(
+    scheme: Scheme,
+    args: &SchemeArgs,
+    ready_timeout: Duration,
+) -> Result<AnyClient> {
     match scheme {
         Scheme::Grpc => {
             #[cfg(feature = "grpc")]

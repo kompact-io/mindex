@@ -361,7 +361,10 @@ impl Backend for Client {
         })
     }
 
-    async fn read_data(&mut self, req: hq::ReadDataRequest) -> Result<Option<hq::ReadDataResponse>> {
+    async fn read_data(
+        &mut self,
+        req: hq::ReadDataRequest,
+    ) -> Result<Option<hq::ReadDataResponse>> {
         match self
             .query
             .read_data(q::ReadDataRequest {

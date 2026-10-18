@@ -146,9 +146,9 @@ enum Output {
 /// call site.
 async fn dispatch<B: Backend>(client: &mut B, cmd: Command) -> Result<Output> {
     match cmd {
-        Command::ReadUtxos { keys } => {
-            Ok(Output::ReadUtxos(client.read_utxos(ReadUtxosRequest { keys }).await?))
-        }
+        Command::ReadUtxos { keys } => Ok(Output::ReadUtxos(
+            client.read_utxos(ReadUtxosRequest { keys }).await?,
+        )),
         Command::SearchUtxos {
             address,
             pay_hash,
